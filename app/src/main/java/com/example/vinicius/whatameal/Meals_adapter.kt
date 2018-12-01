@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.widget.Toast
+import com.example.vinicius.whatameal.Entities.Meal
 import kotlinx.android.synthetic.main.meals_item.view.*
 
 class Meals_adapter(val context: Context, val meals: List<Meal>)
@@ -17,6 +19,7 @@ class Meals_adapter(val context: Context, val meals: List<Meal>)
 
     override fun getItemCount(): Int {
         return meals.size
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,15 +29,15 @@ class Meals_adapter(val context: Context, val meals: List<Meal>)
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindView(context: Context,meal: Meal) {
-            itemView.mealName.text = meal.name
-            itemView.mealCategory.text = meal.category
+
+            itemView.mealName.text = meal.strMeal
+            itemView.mealCategory.text = meal.strCategory
 
             GlideApp.with(context)
-                .load(meal.thumbnail)
+                .load(meal.strMealThumb)
                 .placeholder(R.drawable.product_image_thumbnail_placeholder)
                 .centerCrop()
                 .into(itemView.mealImage)
-
 
         }
 
