@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_meals_list.*
 
 class Meals_list : AppCompatActivity(), MainContract.view {
 
-
     val MealsList: MutableList<Meal> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +28,16 @@ class Meals_list : AppCompatActivity(), MainContract.view {
     override fun showList(meals: List<Meal>) {
         val adapter = Meals_adapter(this, meals)
         val layoutManager = LinearLayoutManager(this)
-        Toast.makeText(this,meals.toString(),Toast.LENGTH_LONG).show()
         RvMeals.adapter = adapter
         RvMeals.layoutManager = layoutManager
+    }
+
+    override fun showProgressBar() {
+        ProgressBar.visibility = android.widget.ProgressBar.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        ProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
     }
 
 }
