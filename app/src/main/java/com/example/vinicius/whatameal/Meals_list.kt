@@ -1,5 +1,6 @@
 package com.example.vinicius.whatameal
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
@@ -29,6 +30,12 @@ class Meals_list : AppCompatActivity(), MainContract.view {
     override fun showList(meals: List<Meal>) {
         val adapter = Meals_adapter(this, meals)
         val layoutManager = LinearLayoutManager(this)
+
+        adapter.configuraClick {
+            val showDetails = Intent(this,Details::class.java)
+            showDetails.putExtra(Details.MEAL, it)
+            this.startActivity(showDetails)
+        }
         RvMeals.adapter = adapter
         RvMeals.layoutManager = layoutManager
     }

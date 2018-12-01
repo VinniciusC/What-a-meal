@@ -1,6 +1,7 @@
 package com.example.vinicius.whatameal
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,12 @@ import kotlinx.android.synthetic.main.meals_item.view.*
 
 class Meals_adapter(val context: Context, val meals: List<Meal>)
     : RecyclerView.Adapter<Meals_adapter.ViewHolder>() {
+
+    var click: ((meal:Meal)->Unit)? = null
+
+    fun configuraClick(click: ((meal:Meal)->Unit)?){
+        this.click = click
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.meals_item, parent, false)
@@ -23,12 +30,12 @@ class Meals_adapter(val context: Context, val meals: List<Meal>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(context,meals[position])
+        holder.bindView(context,meals[position],click)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(context: Context,meal: Meal) {
+        fun bindView(context: Context,meal: Meal, click: ((meal:Meal)->Unit)?) {
 
             itemView.mealName.text = meal.strMeal
             itemView.mealCategory.text = meal.strCategory
@@ -38,8 +45,11 @@ class Meals_adapter(val context: Context, val meals: List<Meal>)
                 .placeholder(R.drawable.product_image_thumbnail_placeholder)
                 .centerCrop()
                 .into(itemView.mealImage)
-
+            if (click != null) {
+                itemView.setOnClickListener {
+                    click.invoke(meal)
+                }
+            }
         }
-
     }
 }

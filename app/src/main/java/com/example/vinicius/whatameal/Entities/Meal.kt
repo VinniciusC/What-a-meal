@@ -1,5 +1,7 @@
 package com.example.vinicius.whatameal.Entities
 
+import java.io.Serializable
+
 data class Meal(val idMeal: String,
                 val strMeal: String,
                 val strCategory: String,
@@ -48,5 +50,5 @@ data class Meal(val idMeal: String,
                 val strMeasure18: String,
                 val strMeasure19: String,
                 val strMeasure20: String,
-                val strSource: String ){
+                val strSource: String ):Serializable{
 }
