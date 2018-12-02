@@ -10,4 +10,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
+    <string name="instructions">Instructions:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="source">Source</string>
+    <string name="youtube_video">YouTube video</string>
 </resources>

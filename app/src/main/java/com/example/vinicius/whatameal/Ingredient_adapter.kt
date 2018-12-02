@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import com.example.vinicius.whatameal.Entities.Ingredient
+import kotlinx.android.synthetic.main.ingredient_item.view.*
 
-class Ingredient_adapter(val context: Context, val ingredients: List<String>)
+class Ingredient_adapter(val context: Context, val ingredients: List<Ingredient>)
     : RecyclerView.Adapter<Ingredient_adapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +27,9 @@ class Ingredient_adapter(val context: Context, val ingredients: List<String>)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(context: Context,ingredient: String) {
-
+        fun bindView(context: Context,ingredient: Ingredient) {
+            itemView.ingredient.text = ingredient.ingredient
+            itemView.measure.text = ingredient.measure
         }
 
     }
