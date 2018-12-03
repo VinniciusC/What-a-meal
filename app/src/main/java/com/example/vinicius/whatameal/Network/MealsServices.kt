@@ -10,5 +10,8 @@ interface MealsServices {
         private const val apiKey = 1
     }
     @GET("$apiKey/latest.php")
-    fun GetLatest(): Call<MealList>
+    fun getLatest(): Call<MealList>
+
+    @GET("$apiKey/random.php")
+    fun getRandom(): Call<MealList>
 }

@@ -9,9 +9,11 @@ interface MainContract {
         fun showList(meals: List<Meal>)
         fun showProgressBar()
         fun hideProgressBar()
+        fun showDetails(meal:Meal)
     }
 
     interface presenter{
         fun onLoadLatest()
+        fun onLoadRandom()
     }
 }

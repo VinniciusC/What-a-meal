@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_meals_list.*
 
 class Meals_list : AppCompatActivity(), MainContract.view {
 
+
     val MealsList: MutableList<Meal> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,10 @@ class Meals_list : AppCompatActivity(), MainContract.view {
 
         val presenter: MainContract.presenter = MainPresenter(this)
         presenter.onLoadLatest()
+
+        randomBtn.setOnClickListener {
+            presenter.onLoadRandom()
+        }
 
     }
 
@@ -32,9 +37,7 @@ class Meals_list : AppCompatActivity(), MainContract.view {
         val layoutManager = LinearLayoutManager(this)
 
         adapter.configuraClick {
-            val showDetails = Intent(this,Details::class.java)
-            showDetails.putExtra(Details.MEAL, it)
-            this.startActivity(showDetails)
+            showDetails(it)
         }
         RvMeals.adapter = adapter
         RvMeals.layoutManager = layoutManager
@@ -46,6 +49,14 @@ class Meals_list : AppCompatActivity(), MainContract.view {
 
     override fun hideProgressBar() {
         ProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
+    }
+
+    override fun showDetails(meal: Meal) {
+
+        val showDetails = Intent(this,Details::class.java)
+        showDetails.putExtra(Details.MEAL, meal)
+        this.startActivity(showDetails)
+
     }
 
 }
