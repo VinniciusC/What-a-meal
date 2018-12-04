@@ -5,7 +5,10 @@
         android:layout_height="72dp"
         android:orientation="horizontal"
         android:paddingRight="16dp"
-        android:paddingVertical="8dp">
+        android:paddingVertical="8dp"
+        android:layout_margin="3dp"
+        android:elevation="2dp"
+        android:background="@color/white">
 
 
     <ImageView
