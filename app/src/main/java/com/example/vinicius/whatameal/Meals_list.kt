@@ -36,15 +36,12 @@ class Meals_list : AppCompatActivity(), MainContract.view {
     override fun showList(meals: List<Meal>) {
         val adapter = Meals_adapter(this, meals)
         val layoutManager = LinearLayoutManager(this)
-        val dividerItemDecoration = DividerItemDecoration(this,layoutManager.orientation)
-
 
         adapter.configuraClick {
             showDetails(it)
         }
         RvMeals.adapter = adapter
         RvMeals.layoutManager = layoutManager
-//        RvMeals.addItemDecoration(dividerItemDecoration)
     }
 
     override fun showProgressBar() {
