@@ -1,26 +1,24 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Main
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
-import android.widget.Toolbar
+import com.example.vinicius.whatameal.Details.Details
 import com.example.vinicius.whatameal.Entities.Meal
-
+import com.example.vinicius.whatameal.R
 import kotlinx.android.synthetic.main.activity_meals_list.*
 
 class Meals_list : AppCompatActivity(), MainContract.view {
 
 
-    val MealsList: MutableList<Meal> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meals_list)
 
-        val presenter: MainContract.presenter = MainPresenter(this)
+        val presenter: MainContract.presenter =
+            MainPresenter(this)
         presenter.onLoadLatest()
 
         randomBtn.setOnClickListener {
@@ -54,7 +52,7 @@ class Meals_list : AppCompatActivity(), MainContract.view {
 
     override fun showDetails(meal: Meal) {
 
-        val showDetails = Intent(this,Details::class.java)
+        val showDetails = Intent(this, Details::class.java)
         showDetails.putExtra(Details.MEAL, meal)
         this.startActivity(showDetails)
 

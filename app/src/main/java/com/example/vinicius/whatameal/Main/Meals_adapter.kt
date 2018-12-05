@@ -1,13 +1,13 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Main
 
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.widget.Toast
 import com.example.vinicius.whatameal.Entities.Meal
+import com.example.vinicius.whatameal.GlideApp
+import com.example.vinicius.whatameal.R
 import kotlinx.android.synthetic.main.meals_item.view.*
 
 class Meals_adapter(val context: Context, val meals: List<Meal>)

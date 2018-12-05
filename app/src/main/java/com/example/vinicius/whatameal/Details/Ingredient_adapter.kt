@@ -1,4 +1,4 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Details
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.example.vinicius.whatameal.Entities.Ingredient
+import com.example.vinicius.whatameal.R
 import kotlinx.android.synthetic.main.ingredient_item.view.*
 
 class Ingredient_adapter(val context: Context, val ingredients: List<Ingredient>)
@@ -22,12 +23,12 @@ class Ingredient_adapter(val context: Context, val ingredients: List<Ingredient>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(context,ingredients[position])
+        holder.bindView(ingredients[position])
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(context: Context,ingredient: Ingredient) {
+        fun bindView(ingredient: Ingredient) {
             itemView.ingredient.text = ingredient.ingredient
             itemView.measure.text = ingredient.measure
         }

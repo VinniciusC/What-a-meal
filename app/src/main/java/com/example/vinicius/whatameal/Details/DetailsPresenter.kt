@@ -1,12 +1,11 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Details
 
-import android.widget.Toast
 import com.example.vinicius.whatameal.Entities.Meal
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import kotlinx.android.synthetic.main.activity_details.*
 
-class DetailsPresenter(val view: DetailsContract.view): DetailsContract.presenter {
+class DetailsPresenter(val view: DetailsContract.view):
+    DetailsContract.presenter {
 
     lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
 
@@ -23,8 +22,6 @@ class DetailsPresenter(val view: DetailsContract.view): DetailsContract.presente
 
         }
 
-        YouTubePlayer.setOnClickListener({
-            YouTubePlayer.initialize(Details.YOUTUBE_API_KEY,youtubePlayerInit)
-        })
+        view.listenerPlayer(youtubePlayerInit)
     }
 }

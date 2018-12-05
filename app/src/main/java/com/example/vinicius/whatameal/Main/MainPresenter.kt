@@ -1,4 +1,4 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Main
 
 import com.example.vinicius.whatameal.Entities.Meal
 import com.example.vinicius.whatameal.Entities.MealList
@@ -7,7 +7,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainPresenter(val view : MainContract.view): MainContract.presenter {
+class MainPresenter(val view : MainContract.view):
+    MainContract.presenter {
 
 
     override fun onLoadLatest(){

@@ -1,16 +1,17 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.vinicius.whatameal.Entities.Ingredient
 import com.example.vinicius.whatameal.Entities.Meal
+import com.example.vinicius.whatameal.GlideApp
+import com.example.vinicius.whatameal.R
 import com.google.android.youtube.player.YouTubeBaseActivity
-import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_details.*
-import android.content.Intent
-import android.net.Uri
 
 
 class Details : YouTubeBaseActivity(), DetailsContract.view {
@@ -26,7 +27,8 @@ class Details : YouTubeBaseActivity(), DetailsContract.view {
 
         val meal = intent.getSerializableExtra(MEAL) as Meal
         val Ingredients: ArrayList<Ingredient> = ingredients(meal)
-        val presenter: DetailsContract.presenter = DetailsPresenter(this)
+        val presenter: DetailsContract.presenter =
+            DetailsPresenter(this)
 
         putMeal(meal,Ingredients)
         presenter.initUI(meal)
@@ -57,9 +59,9 @@ class Details : YouTubeBaseActivity(), DetailsContract.view {
             .centerCrop()
             .into(image)
     }
-    fun listenerPlayer(youtubePlayerInit: YouTubePlayer.OnInitializedListener){
+    override fun listenerPlayer(youtubePlayerInit: YouTubePlayer.OnInitializedListener){
         YouTubePlayer.setOnClickListener({
-            com.google.android.youtube.player.YouTubePlayer.initialize(Details.YOUTUBE_API_KEY, youtubePlayerInit)
+            YouTubePlayer.initialize(YOUTUBE_API_KEY, youtubePlayerInit)
         })
     }
     fun ingredients (meal: Meal):ArrayList<Ingredient>{
