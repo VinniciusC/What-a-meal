@@ -1,4 +1,4 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Main
 
 import com.example.vinicius.whatameal.Entities.Meal
 

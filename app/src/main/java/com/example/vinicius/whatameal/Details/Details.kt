@@ -1,26 +1,25 @@
-package com.example.vinicius.whatameal
+package com.example.vinicius.whatameal.Details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.vinicius.whatameal.Entities.Ingredient
 import com.example.vinicius.whatameal.Entities.Meal
+import com.example.vinicius.whatameal.GlideApp
+import com.example.vinicius.whatameal.R
 import com.google.android.youtube.player.YouTubeBaseActivity
-import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_details.*
-import android.content.Intent
-import android.net.Uri
 
 
-class Details : YouTubeBaseActivity() {
+class Details : YouTubeBaseActivity(), DetailsContract.view {
 
     companion object {
         val MEAL: String = "meal"
         val YOUTUBE_API_KEY: String = "AIzaSyBh0GZegqHSHAqUvlF46WHiHHC4uzbAHcE"
     }
-
-    lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,33 +27,17 @@ class Details : YouTubeBaseActivity() {
 
         val meal = intent.getSerializableExtra(MEAL) as Meal
         val Ingredients: ArrayList<Ingredient> = ingredients(meal)
+        val presenter: DetailsContract.presenter =
+            DetailsPresenter(this)
 
         putMeal(meal,Ingredients)
-        initUI(meal)
+        presenter.initUI(meal)
 
         source.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(meal.strSource)
             startActivity(i)
         }
-    }
-
-    private fun initUI(meal: Meal) {
-        youtubePlayerInit = object : YouTubePlayer.OnInitializedListener{
-            override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, youtubePlayer: YouTubePlayer?, p2: Boolean) {
-                var videoID:String = meal.strYoutube.substringAfter("v=")
-                youtubePlayer?.loadVideo(videoID)
-            }
-
-            override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
-                Toast.makeText(applicationContext,"Something went wrong", Toast.LENGTH_LONG).show()
-            }
-
-        }
-
-        YouTubePlayer.setOnClickListener({
-            YouTubePlayer.initialize(YOUTUBE_API_KEY,youtubePlayerInit)
-        })
     }
 
     private fun putMeal(meal: Meal, ingredients:ArrayList<Ingredient>) {
@@ -76,7 +59,11 @@ class Details : YouTubeBaseActivity() {
             .centerCrop()
             .into(image)
     }
-
+    override fun listenerPlayer(youtubePlayerInit: YouTubePlayer.OnInitializedListener){
+        YouTubePlayer.setOnClickListener({
+            YouTubePlayer.initialize(YOUTUBE_API_KEY, youtubePlayerInit)
+        })
+    }
     fun ingredients (meal: Meal):ArrayList<Ingredient>{
 
         val list: ArrayList<Ingredient> = ArrayList()
@@ -145,6 +132,10 @@ class Details : YouTubeBaseActivity() {
             list.add(Ingredient(meal.strMeasure20,meal.strIngredient20))
         }
         return list
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
 }
